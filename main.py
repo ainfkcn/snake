@@ -35,7 +35,8 @@ def main():
                     if gameover(screen, score) == 0:  # 返回主界面
                         break
                     map_num = 0
-            game_clear(screen, score) == 0
+            if how_end != dead:
+                game_clear(screen, score) == 0
         elif game_mode == classic or game_mode == endless:
             while True:
                 snake_map = read_map(1)

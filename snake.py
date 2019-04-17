@@ -31,7 +31,7 @@ def running_game(screen, snake_speed_clock, snake_map, mode):
                                snake_map, special_effcet, score)
         if not alive:
             return (dead, score[0])
-        if len(snake_coords) >= 30:
+        if len(snake_coords) >= 30 and mode==break_through:
             return (change_map, score[0])
 
         screen.fill(BG_COLOR)

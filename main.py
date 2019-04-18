@@ -254,9 +254,8 @@ def high_score(screen, mode, score=0):
 def gameover(screen, score):
     # 播放死亡音效
     pygame.mixer.init()
-    pygame.mixer_music.load('./sound/gameover.wav')
-    pygame.mixer_music.set_volume(0.2)
-    pygame.mixer_music.play()
+    sound=pygame.mixer.Sound('./sound/gameover.wav')
+    sound.play()
     # 显示死亡信息
     font = pygame.font.Font('./font/myfont.ttf', 40)
     tip1 = font.render('按Q返回主界面,ESC退出', True, (65, 105, 225))
@@ -284,26 +283,26 @@ def gameover(screen, score):
 
 # 闯关成功
 def game_clear(screen, score):
+    pygame.mixer.music.stop()
+    font = pygame.font.Font('./font/myfont.ttf', 72)
+    test1 = font.render('恭喜通关', True, red)
+    screen.blit(test1, (285, 250))
+    font = pygame.font.Font('./font/myfont.ttf', 40)
+    tip1 = font.render('按Q返回主界面,ESC退出', True, (65, 105, 225))
+    screen.blit(tip1, (220, 525))
+    pygame.display.update()
+    # 记载最高分
+    high_score(screen, write, score)
+    # 键盘监听事件
     while True:
-        font = pygame.font.Font('./font/myfont.ttf', 72)
-        test1 = font.render('恭喜通关', True, red)
-        screen.blit(test1, (285, 250))
-        font = pygame.font.Font('./font/myfont.ttf', 40)
-        tip1 = font.render('按Q返回主界面,ESC退出', True, (65, 105, 225))
-        screen.blit(tip1, (220, 525))
-        pygame.display.update()
-        # 记载最高分
-        high_score(screen, write, score)
-        # 键盘监听事件
-        while True:
-            for event in pygame.event.get():
-                if event.type == QUIT:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                terminate()
+            elif event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
                     terminate()
-                elif event.type == KEYDOWN:
-                    if event.key == K_ESCAPE:
-                        terminate()
-                    elif event.key == K_q:
-                        return
+                elif event.key == K_q:
+                    return
 
 
 if __name__ == "__main__":

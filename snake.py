@@ -21,6 +21,11 @@ def running_game(screen, snake_speed_clock, snake_map, mode):
                     {'x': 1, 'y': 1}]
     food_generation(snake_coords, snake_map, food,
                     special_effcet, mode)  # 食物随机位置
+    # 背景音乐
+    pygame.mixer.init()
+    pygame.mixer.music.load('./sound/TheBlueDanube.mp3')
+    pygame.mixer.music.set_volume(0.2)
+    pygame.mixer.music.play(-1)
     while True:
         get_dirction(direction)
         move_snake(direction, snake_coords)  # 移动蛇
@@ -30,6 +35,7 @@ def running_game(screen, snake_speed_clock, snake_map, mode):
         alive = snake_is_alive(snake_coords, direction,
                                snake_map, special_effcet, score)
         if not alive:
+            pygame.mixer.music.stop()
             return (dead, score[0])
         if len(snake_coords) >= 30 and mode==break_through:
             return (change_map, score[0])

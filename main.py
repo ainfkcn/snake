@@ -42,7 +42,7 @@ def main():
                 snake_map = read_map(0)
                 (how_end, score) = running_game(
                     screen, snake_speed_clock, snake_map, game_mode)
-                if how_end==dead:
+                if how_end == dead:
                     if gameover(screen, score) == 0:  # 返回主界面
                         break
 

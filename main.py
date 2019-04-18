@@ -39,7 +39,7 @@ def main():
                 game_clear(screen, score) == 0
         elif game_mode == classic or game_mode == endless:
             while True:
-                snake_map = read_map(1)
+                snake_map = read_map(0)
                 (how_end, score) = running_game(
                     screen, snake_speed_clock, snake_map, game_mode)
                 if how_end==dead:
@@ -91,27 +91,43 @@ def start_screen(screen):
 
 
 def mode_select(screen):
+    screen.fill(black)
     while True:
         # 鼠标指向变色
         pos = pygame.mouse.get_pos()
         (mouse_x, mouse_y) = (pos[0], pos[1])
         if 285 <= mouse_x <= 285+235 and 100 <= mouse_y <= 100+76:
-            mode_button1 = pygame.image.load('./pic/gamemodebutton1.png')
-            screen.blit(mode_button1, (0, 0))
+            font = pygame.font.Font('./font/myfont.ttf', 72)
+            mode_button1 = font.render('闯关模式', True, orange)
+            screen.blit(mode_button1, (285, 100))
             pygame.display.update()
         elif 285 <= mouse_x <= 285+235 and 250 <= mouse_y <= 250+76:
-            mode_button2 = pygame.image.load('./pic/gamemodebutton2.png')
-            screen.blit(mode_button2, (0, 0))
+            font = pygame.font.Font('./font/myfont.ttf', 72)
+            mode_button2 = font.render('传统模式', True, orange)
+            screen.blit(mode_button2, (285, 250))
             pygame.display.update()
         elif 285 <= mouse_x <= 285+235 and 400 <= mouse_y <= 400+76:
-            mode_button3 = pygame.image.load('./pic/gamemodebutton3.png')
-            screen.blit(mode_button3, (0, 0))
+            font = pygame.font.Font('./font/myfont.ttf', 72)
+            mode_button3 = font.render('无尽模式', True, orange)
+            screen.blit(mode_button3, (285, 400))
+            pygame.display.update()
+        elif 630 <= mouse_x <= 790 and 550 <= mouse_y <= 590:
+            font = pygame.font.Font('./font/myfont.ttf', 40)
+            return_button1 = font.render('返回主界面', True, orange)
+            screen.blit(return_button1, (630, 550))
             pygame.display.update()
         else:
-            game_mode = pygame.image.load('./pic/gamemode.png')
-            screen.blit(game_mode, (0, 0))
+            font = pygame.font.Font('./font/myfont.ttf', 40)
+            return_button = font.render('返回主界面', True, white)
+            screen.blit(return_button, (630, 550))
+            font = pygame.font.Font('./font/myfont.ttf', 72)
+            mode_button1 = font.render('闯关模式', True, white)
+            screen.blit(mode_button1, (285, 100))
+            mode_button2 = font.render('传统模式', True, white)
+            screen.blit(mode_button2, (285, 250))
+            mode_button3 = font.render('无尽模式', True, white)
+            screen.blit(mode_button3, (285, 400))
             pygame.display.update()
-
         for event in pygame.event.get():
             if event.type == QUIT:
                 terminate()
@@ -127,6 +143,8 @@ def mode_select(screen):
                     return classic
                 elif 285 <= mouse_x <= 285+235 and 400 <= mouse_y <= 400+76:
                     return endless
+                elif 630 <= mouse_x <= 790 and 550 <= mouse_y <= 590:
+                    return
 
 
 def show_help(screen):

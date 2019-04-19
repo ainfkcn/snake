@@ -1,3 +1,4 @@
+# pyinstaller -F -w --icon=tcs.ico main.py -p snake.py -p paremeter.py --hidden-import snake --hidden-import paremeter
 import pygame
 import os
 from time import sleep

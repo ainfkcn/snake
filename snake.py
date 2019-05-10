@@ -37,7 +37,7 @@ def running_game(screen, snake_speed_clock, snake_map, mode):
         if not alive:
             pygame.mixer.music.stop()
             return (dead, score[0])
-        if len(snake_coords) >= 30 and mode==break_through:
+        if len(snake_coords) >= 30 and mode == break_through:
             return (change_map, score[0])
 
         screen.fill(BG_COLOR)

@@ -258,7 +258,7 @@ def high_score(screen, mode, score=0):
 def gameover(screen, score):
     # 播放死亡音效
     pygame.mixer.init()
-    sound=pygame.mixer.Sound('./sound/gameover.wav')
+    sound = pygame.mixer.Sound('./sound/gameover.wav')
     sound.play()
     # 显示死亡信息
     font = pygame.font.Font('./font/myfont.ttf', 40)

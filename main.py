@@ -153,6 +153,7 @@ def show_help(screen):
         pos = pygame.mouse.get_pos()
         (mouse_x, mouse_y) = (pos[0], pos[1])
         if 630 <= mouse_x <= 790 and 550 <= mouse_y <= 590:
+            font = pygame.font.Font('./font/myfont.ttf', 40)
             return_button1 = font.render('返回主界面', True, orange)
             screen.blit(return_button1, (630, 550))
             pygame.display.update()
@@ -201,11 +202,12 @@ def high_score(screen, mode, score=0):
         scores = score_file.readlines()
         for i in range(0, len(scores)):
             scores[i] = int(scores[i].strip())
-
     except:
         score_file = open('./score.tcs', 'w')
-        score_file.close()
         scores = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        for ele in scores:
+            print(ele, file=score_file)
+        score_file.close()
     if mode == write:
         scores.append(score)
         scores.sort(reverse=True)
@@ -222,6 +224,7 @@ def high_score(screen, mode, score=0):
             pos = pygame.mouse.get_pos()
             (mouse_x, mouse_y) = (pos[0], pos[1])
             if 630 <= mouse_x <= 790 and 550 <= mouse_y <= 590:
+                font = pygame.font.Font('./font/myfont.ttf', 40)
                 return_button1 = font.render('返回主界面', True, orange)
                 screen.blit(return_button1, (630, 550))
                 pygame.display.update()
